@@ -11,10 +11,7 @@
 }
 
 canvas {
-    max-width: 650px !important;
-    min-width: 300px !important;
-    max-height: 650px !important;
-    min-height: 300px !important;
+    width: 100% !important;
 }
 
 .border-chart {

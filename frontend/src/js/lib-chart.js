@@ -13,8 +13,10 @@ new Chart(chartOne, {
     }]
   },
   options: {
-    radius: '90%',
+    radius: '100%',
     responsive: true,
+    maintainAspectRatio: false,
+    aspectRatio: 2,
     layout: {
       padding: 0
     },
@@ -42,8 +44,10 @@ new Chart(chartTwo, {
     }]
   },
   options: {
-    radius: '90%',
+    radius: '100%',
     responsive: true,
+    maintainAspectRatio: false,
+    aspectRatio: 2,
     layout: {
       padding: 0
     },
