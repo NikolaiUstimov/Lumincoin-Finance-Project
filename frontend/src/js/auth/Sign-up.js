@@ -73,14 +73,15 @@ export class SignUp {
 
       if (result) {
         let res = await result.json();
-        console.log(res);
+        // console.log(res);
         let userData = {
           id: res.user.id,
           name: res.user.name,
           lastName: res.user.lastName,
         };
         localStorage.setItem('userSignUp', JSON.stringify(userData));
-        // window.location.replace('main.html');
+
+        window.location.href = "#/main"
       }
 
       this.userNameInputElement.value = '';

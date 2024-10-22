@@ -31,6 +31,87 @@ export class Router {
         scripts: ['node_modules/chart.js/dist/chart.umd.js', 'src/js/lib-chart.js'],
         load: () => {}
       },
+      {
+        route: '#/revenues',
+        title: 'Доходы',
+        template: 'src/templates/revenues/revenues.html',
+        layout: 'src/templates/layout.html',
+        styles: ['src/styles/revenues/revenues.css'],
+        scripts: [],
+        load: () => {}
+      },
+      {
+        route: '#/revenues-add',
+        title: 'Создание дохода',
+        template: 'src/templates/revenues/revenues-add.html',
+        layout: 'src/templates/layout.html',
+        styles: ['src/styles/revenues/revenues-add.css'],
+        scripts: [],
+        load: () => {}
+      },
+      {
+        route: '#/revenues-edit',
+        title: 'Редактирование дохода',
+        template: 'src/templates/revenues/revenues-edit.html',
+        layout: 'src/templates/layout.html',
+        styles: ['src/styles/revenues/revenues-edit.css'],
+        scripts: [],
+        load: () => {}
+      },
+      {
+        route: '#/expenses',
+        title: 'Расходы',
+        template: 'src/templates/expenses/expenses.html',
+        layout: 'src/templates/layout.html',
+        styles: ['src/styles/expenses/expenses.css'],
+        scripts: [],
+        load: () => {}
+      },
+      {
+        route: '#/expenses-add',
+        title: 'Создание расхода',
+        template: 'src/templates/expenses/expenses-add.html',
+        layout: 'src/templates/layout.html',
+        styles: ['src/styles/expenses/expenses-add.css'],
+        scripts: [],
+        load: () => {}
+      },
+      {
+        route: '#/expenses-edit',
+        title: 'Редактирование расхода',
+        template: 'src/templates/expenses/expenses-edit.html',
+        layout: 'src/templates/layout.html',
+        styles: ['src/styles/expenses/expenses-edit.css'],
+        scripts: [],
+        load: () => {}
+      },
+      {
+        route: '#/general-finance',
+        title: 'Доходы и Расходы',
+        template: 'src/templates/general-finance/general-finance.html',
+        layout: 'src/templates/layout.html',
+        styles: ['src/styles/general-finance/general-finance.css'],
+        scripts: [],
+        load: () => {}
+      },
+      {
+        route: '#/general-finance-add',
+        title: 'Создание дохода/расхода',
+        template: 'src/templates/general-finance/general-finance-add.html',
+        layout: 'src/templates/layout.html',
+        styles: ['src/styles/general-finance/general-finance-add.css'],
+        scripts: [],
+        load: () => {}
+      },
+      {
+        route: '#/general-finance-edit',
+        title: 'Редактирование дохода/расхода',
+        template: 'src/templates/general-finance/general-finance-edit.html',
+        layout: 'src/templates/layout.html',
+        styles: ['src/styles/general-finance/general-finance-edit.css'],
+        scripts: [],
+        load: () => {}
+      },
     ];
 
     this.currentStyles = [];
