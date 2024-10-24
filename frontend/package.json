@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "http-server"
   },
   "author": "NikolaiUstimov",
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "chart.js": "^4.4.4"
+    "chart.js": "^4.4.4",
+    "http-server": "^14.1.1"
   }
 }
