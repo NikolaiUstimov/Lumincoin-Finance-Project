@@ -1,9 +1,15 @@
+import config from "../../config/config.js";
+
 export class Login {
   constructor() {
     this.buttonSubmitElement = document.getElementById('submitLogin');
     this.emailInputElement = document.getElementById('emailInput');
     this.passwordInputElement = document.getElementById('passwordInput');
     this.checkInputElement = document.getElementById('flexCheckDefault');
+
+    if (localStorage.getItem('accessToken')) {
+      window.location.href = '#/main';
+    }
 
     this.emailInputElement.addEventListener('keydown', this.preventSpace.bind(this));
     this.buttonSubmitElement.addEventListener('click', this.login.bind(this));
@@ -44,7 +50,7 @@ export class Login {
         rememberMe: this.checkInputElement.checked,
       }
 
-      const result = await fetch('http://localhost:3000/api/login', {
+      const response = await fetch(config.host + '/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -53,22 +59,27 @@ export class Login {
         body: JSON.stringify(data),
       });
 
-      if (result) {
-        let res = await result.json();
-        let loginData = {
-          accessToken: res.tokens.accessToken,
-          refreshToken: res.tokens.refreshToken,
+      if (response.ok === true) {
+        const result = await response.json();
+        const userData = {
+          accessToken: result.tokens.accessToken,
+          refreshToken: result.tokens.refreshToken,
           user: {
-            userId: res.user.id,
-            userName: res.user.name,
-            userLastName: res.user.lastName,
+            userId: result.user.id,
+            userName: result.user.name,
+            userLastName: result.user.lastName,
           }
         }
-        localStorage.setItem('accessToken', JSON.stringify(loginData.accessToken));
-        localStorage.setItem('refreshToken', JSON.stringify(loginData.refreshToken));
-        localStorage.setItem('userLogin', JSON.stringify(loginData.user));
+        localStorage.setItem('accessToken', JSON.stringify(userData.accessToken));
+        localStorage.setItem('refreshToken', JSON.stringify(userData.refreshToken));
+        localStorage.setItem('userInfo', JSON.stringify(userData.user));
 
-        window.location.href = "#/main"
+        window.location.href = "#/main";
+      } else {
+        const result = await response.json();
+        if (result.error) {
+          console.error(result.message);
+        }
       }
 
       this.emailInputElement.value = '';

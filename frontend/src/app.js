@@ -1,4 +1,4 @@
-import {Router} from "./Router.js";
+import {Router} from "./router.js";
 
 class App {
   constructor() {

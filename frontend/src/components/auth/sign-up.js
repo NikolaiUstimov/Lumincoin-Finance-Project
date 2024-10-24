@@ -1,3 +1,5 @@
+import config from "../../config/config.js";
+
 export class SignUp {
   constructor() {
     this.buttonSubmitElement = document.getElementById('submitLogin');
@@ -5,6 +7,10 @@ export class SignUp {
     this.emailInputElement = document.getElementById('emailInput');
     this.passwordInputElement = document.getElementById('passwordInput');
     this.repeatPasswordInputElement = document.getElementById('repeatPasswordInput');
+
+    if (localStorage.getItem('accessToken')) {
+      window.location.href = '#/main';
+    }
 
     this.emailInputElement.addEventListener('keydown', this.preventSpace.bind(this));
     this.buttonSubmitElement.addEventListener('click', this.signUp.bind(this));
@@ -53,16 +59,16 @@ export class SignUp {
   async signUp(e) {
     e.preventDefault();
     if (this.validateForm()) {
-      let splitSrt = this.userNameInputElement.value.split(' ');
+      let splitStr = this.userNameInputElement.value.split(' ');
       let data = {
-        name: splitSrt[1],
-        lastName: splitSrt[0],
+        name: splitStr[1],
+        lastName: splitStr[0],
         email: this.emailInputElement.value,
         password: this.passwordInputElement.value,
         passwordRepeat: this.repeatPasswordInputElement.value,
       }
 
-      const result = await fetch('http://localhost:3000/api/signup', {
+      const result = await fetch(config.host + '/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -74,14 +80,14 @@ export class SignUp {
       if (result) {
         let res = await result.json();
         // console.log(res);
-        let userData = {
-          id: res.user.id,
-          name: res.user.name,
-          lastName: res.user.lastName,
-        };
-        localStorage.setItem('userSignUp', JSON.stringify(userData));
+        // let userData = {
+        //   id: res.user.id,
+        //   name: res.user.name,
+        //   lastName: res.user.lastName,
+        // };
+        // localStorage.setItem('userData', JSON.stringify(userData));
 
-        window.location.href = "#/main"
+        window.location.href = "#/login";
       }
 
       this.userNameInputElement.value = '';

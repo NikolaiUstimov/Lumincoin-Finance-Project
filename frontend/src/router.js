@@ -1,5 +1,6 @@
-import {Login} from "./js/auth/Login.js";
-import {SignUp} from "./js/auth/Sign-up.js";
+import {Login} from "./components/auth/login.js";
+import {SignUp} from "./components/auth/sign-up.js";
+import {Logout} from "./components/auth/logout.js";
 
 export class Router {
   constructor() {
@@ -23,12 +24,18 @@ export class Router {
         }
       },
       {
+        route: '#/logout',
+        load: () => {
+          new Logout();
+        }
+      },
+      {
         route: '#/main',
         title: 'Главная',
         template: 'src/templates/main.html',
         layout: 'src/templates/layout.html',
         styles: ['src/styles/main.css'],
-        scripts: ['node_modules/chart.js/dist/chart.umd.js', 'src/js/lib-chart.js'],
+        scripts: ['node_modules/chart.js/dist/chart.umd.js', 'src/components/lib-chart.js'],
         load: () => {}
       },
       {
@@ -124,8 +131,14 @@ export class Router {
     const newRoute = this.routes.find(item => {
       return item.route === hashRoute;
     });
+    console.log(newRoute);
 
     if (!newRoute) {
+      window.location.href = "#/login";
+      return;
+    }
+
+    if (newRoute.route !== '#/login' && newRoute.route !== '#/signup' && !localStorage.getItem('accessToken')) {
       window.location.href = "#/login";
       return;
     }
