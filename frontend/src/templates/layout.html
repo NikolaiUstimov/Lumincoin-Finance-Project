@@ -1,0 +1,54 @@
+<main class="container-fluid w-100 p-0">
+  <div class="row w-100 p-0 g-0">
+    <aside class="sidebar col-12 col-md-3 col-lg-2 min-vh-100 border-2 border-end m-0 p-0 d-none d-md-flex flex-column flex-shrink-0">
+      <figure class="text-center pt-5 pb-4 m-0">
+        <img src="src/static/images/Logo.png" alt="logo" class="img-fluid">
+      </figure>
+      <section class="menu pt-5 ps-3 pe-3 border-2 border-top h-75 d-flex flex-column justify-content-between">
+        <div class="link-container ps-2">
+          <a href="/#/main" class="link-sidebar p-2 d-flex align-items-center rounded flex-grow-1"><img src="src/static/images/svg/house.svg" class="icon-link me-2 img-fluid" alt="home">Главная</a>
+          <a href="/#/general-finance" class="link-sidebar p-2 d-flex align-items-center rounded flex-grow-1"><img src="src/static/images/svg/cash-coin.svg" class="icon-link me-2 img-fluid" alt="coin">Доходы & Расходы</a>
+          <details class="details-link-drop">
+            <summary class="p-2 position-relative rounded">Категории</summary>
+            <a href="/#/revenues" class="link-sidebar d-block p-2 rounded">Доходы</a>
+            <a href="/#/expenses" class="link-sidebar d-block p-2 rounded">Расходы</a>
+          </details>
+        </div>
+        <p class="balance ps-2">Баланс: <span class="text-primary">500$</span></p>
+      </section>
+      <section class="person border-2 border-top">
+        <figure class="d-flex align-items-center m-0 ps-3 pe-3 pt-4 mb-auto">
+          <img src="src/static/images/person-icon.png" alt="person-icon" class="img-fluid">
+          <p class="user-name m-0 ms-3 w-100 text-truncate">Николай Устимов</p>
+        </figure>
+      </section>
+    </aside>
+
+    <header class="d-md-none pt-3 pb-0 bg-light border-2 border-bottom">
+      <div class="text-center">
+        <img src="src/static/images/Logo.png" alt="logo" class="img-fluid">
+      </div>
+      <div class="text-center" id="mobileMenu">
+        <nav class="nav d-flex justify-content-center">
+          <a href="/#/main" class="link-sidebar text-dark nav-link p-2 rounded">Главная</a>
+          <a href="#" class="link-sidebar text-dark nav-link p-2 rounded">Доходы & Расходы</a>
+          <details class="details-link-drop">
+            <summary class="p-2 pe-4 position-relative rounded">Категории</summary>
+            <a href="/#/revenues" class="link-sidebar text-dark d-block p-2 rounded">Доходы</a>
+            <a href="/#/expenses" class="link-sidebar text-dark d-block p-2 rounded">Расходы</a>
+          </details>
+        </nav>
+        <p class="balance pt-3 pb-3 m-0">Баланс: <span class="text-primary"><span class="balance-number">500</span>$</span></p>
+        <section class="person border-2 border-top d-flex justify-content-center">
+          <figure class="d-flex align-items-center m-0 p-3">
+            <img src="src/static/images/person-icon.png" alt="person-icon" class="img-fluid">
+            <p class="user-name m-0 ms-3 w-100 text-truncate">Николай Устимов</p>
+          </figure>
+        </section>
+      </div>
+    </header>
+
+    <section id="content-layout" class="col-12 col-md-9 col-lg-10 ms-0 me-0 ms-md-auto me-md-auto ps-3 pe-3 pb-4 section-content"></section>
+
+  </div>
+</main>
