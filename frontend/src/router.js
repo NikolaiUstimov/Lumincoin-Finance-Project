@@ -5,6 +5,7 @@ import {Main} from "./components/main.js";
 import config from "./config/config.js";
 import {HttpService} from "./services/http-service.js";
 import {AuthUtils} from "./utils/auth-utils.js";
+import {Revenue} from "./components/revenues/revenues.js";
 
 export class Router {
   constructor() {
@@ -53,7 +54,9 @@ export class Router {
         layout: 'src/templates/layout.html',
         styles: ['src/styles/revenues/revenues.css'],
         scripts: [],
-        load: () => {}
+        load: () => {
+          new Revenue();
+        }
       },
       {
         route: '#/revenues-add',
