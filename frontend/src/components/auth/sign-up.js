@@ -1,4 +1,6 @@
 import config from "../../config/config.js";
+import {AuthService} from "../../services/auth-service.js";
+import {AuthUtils} from "../../utils/auth-utils.js";
 
 export class SignUp {
   constructor() {
@@ -8,7 +10,7 @@ export class SignUp {
     this.passwordInputElement = document.getElementById('passwordInput');
     this.repeatPasswordInputElement = document.getElementById('repeatPasswordInput');
 
-    if (localStorage.getItem('accessToken')) {
+    if (localStorage.getItem(AuthUtils.accessTokenKey)) {
       window.location.href = '#/main';
     }
 
@@ -68,26 +70,18 @@ export class SignUp {
         passwordRepeat: this.repeatPasswordInputElement.value,
       }
 
-      const result = await fetch(config.host + '/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
+      try {
+        const result = await AuthService.request(config.host + '/signup', 'POST', data);
 
-      if (result) {
-        let res = await result.json();
-        // console.log(res);
-        // let userData = {
-        //   id: res.user.id,
-        //   name: res.user.name,
-        //   lastName: res.user.lastName,
-        // };
-        // localStorage.setItem('userData', JSON.stringify(userData));
-
-        window.location.href = "#/login";
+        if (result) {
+          if (result.error || !result.user) {
+            throw new Error(result.message);
+          }
+          localStorage.setItem('userEmail', JSON.stringify(data.email));
+          window.location.href = "#/login";
+        }
+      } catch (e) {
+        console.error("Произошла ошибка при регистрации, обратитесь в поддержку " + e);
       }
 
       this.userNameInputElement.value = '';

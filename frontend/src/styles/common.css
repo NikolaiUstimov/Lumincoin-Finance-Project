@@ -63,11 +63,11 @@ a {
     width: 15px;
     height: 15px;
     right: 30px;
-    background-image: url("../images/svg/chevron-right.svg");
+    background-image: url("../static/images/svg/chevron-right.svg");
 }
 
 .details-link-drop summary:focus:after {
-    background-image: url("../images/svg/chevron-right-white.svg");
+    background-image: url("../static/images/svg/chevron-right-white.svg");
 }
 
 .details-link-drop[open] summary:after {
@@ -75,12 +75,12 @@ a {
     content: '';
     width: 15px;
     height: 15px;
-    background-image: url("../images/svg/chevron-right.svg");
+    background-image: url("../static/images/svg/chevron-right.svg");
     transform: rotate(90deg);
 }
 
 .details-link-drop[open] summary:focus:after {
-    background-image: url("../images/svg/chevron-right-white.svg");
+    background-image: url("../static/images/svg/chevron-right-white.svg");
 }
 
 .person {
@@ -126,7 +126,11 @@ a {
     }
 
     .person figure {
-        max-width: 210px;
+        text-align: start;
+    }
+
+    .person figure p {
+        max-width: max-content;
     }
 
     .section-content {

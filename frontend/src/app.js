@@ -8,8 +8,7 @@ class App {
   }
 
   routeChanging() {
-    console.log('routeChanging сработало');
-    this.router.openRoute();
+    this.router.openRoute().then();
   }
 }
 

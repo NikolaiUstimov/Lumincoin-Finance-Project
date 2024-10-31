@@ -1,4 +1,6 @@
 import config from "../../config/config.js";
+import {AuthUtils} from "../../utils/auth-utils.js";
+import {AuthService} from "../../services/auth-service.js";
 
 export class Login {
   constructor() {
@@ -7,8 +9,14 @@ export class Login {
     this.passwordInputElement = document.getElementById('passwordInput');
     this.checkInputElement = document.getElementById('flexCheckDefault');
 
-    if (localStorage.getItem('accessToken')) {
+    if (localStorage.getItem(AuthUtils.accessTokenKey)) {
       window.location.href = '#/main';
+    }
+
+    if (localStorage.getItem('userEmail')) {
+      this.emailInputElement.value = JSON.parse(localStorage.getItem('userEmail'));
+    } else {
+      this.emailInputElement.value = '';
     }
 
     this.emailInputElement.addEventListener('keydown', this.preventSpace.bind(this));
@@ -50,36 +58,30 @@ export class Login {
         rememberMe: this.checkInputElement.checked,
       }
 
-      const response = await fetch(config.host + '/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
+      try {
+        const result = await AuthService.request(config.host + '/login', 'POST', data);
 
-      if (response.ok === true) {
-        const result = await response.json();
-        const userData = {
-          accessToken: result.tokens.accessToken,
-          refreshToken: result.tokens.refreshToken,
-          user: {
-            userId: result.user.id,
-            userName: result.user.name,
-            userLastName: result.user.lastName,
+        if (result) {
+          if (result.error || !result.tokens || !result.user) {
+            throw new Error(result.message);
           }
-        }
-        localStorage.setItem('accessToken', JSON.stringify(userData.accessToken));
-        localStorage.setItem('refreshToken', JSON.stringify(userData.refreshToken));
-        localStorage.setItem('userInfo', JSON.stringify(userData.user));
+          const userData = {
+            accessToken: result.tokens.accessToken,
+            refreshToken: result.tokens.refreshToken,
+            user: {
+              userId: result.user.id,
+              userName: result.user.name,
+              userLastName: result.user.lastName,
+            }
+          }
+          AuthUtils.setTokenKey(userData.accessToken, userData.refreshToken);
+          AuthUtils.setUserInfo(userData.user);
 
-        window.location.href = "#/main";
-      } else {
-        const result = await response.json();
-        if (result.error) {
-          console.error(result.message);
+          localStorage.removeItem('userEmail');
+          window.location.href = "#/main";
         }
+      } catch (e) {
+        throw new Error(e);
       }
 
       this.emailInputElement.value = '';

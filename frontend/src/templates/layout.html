@@ -14,13 +14,13 @@
             <a href="/#/expenses" class="link-sidebar d-block p-2 rounded">Расходы</a>
           </details>
         </div>
-        <p class="balance ps-2">Баланс: <span class="text-primary">500$</span></p>
+        <p class="balance ps-2">Баланс: <span class="text-primary"><span class="balance-number"></span>$</span></p>
       </section>
-      <section class="person border-2 border-top">
-        <figure class="d-flex align-items-center m-0 ps-3 pe-3 pt-4 mb-auto">
+      <section class="person border-2 border-top mb-3">
+        <a href="#/logout" class="d-flex align-items-center m-0 ps-3 pe-3 pt-4 mb-auto" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
           <img src="src/static/images/person-icon.png" alt="person-icon" class="img-fluid">
-          <p class="user-name m-0 ms-3 w-100 text-truncate">Николай Устимов</p>
-        </figure>
+          <p class="user-name m-0 ms-3"></p>
+        </a>
       </section>
     </aside>
 
@@ -31,24 +31,24 @@
       <div class="text-center" id="mobileMenu">
         <nav class="nav d-flex justify-content-center">
           <a href="/#/main" class="link-sidebar text-dark nav-link p-2 rounded">Главная</a>
-          <a href="#" class="link-sidebar text-dark nav-link p-2 rounded">Доходы & Расходы</a>
+          <a href="/#/general-finance" class="link-sidebar text-dark nav-link p-2 rounded">Доходы & Расходы</a>
           <details class="details-link-drop">
             <summary class="p-2 pe-4 position-relative rounded">Категории</summary>
             <a href="/#/revenues" class="link-sidebar text-dark d-block p-2 rounded">Доходы</a>
             <a href="/#/expenses" class="link-sidebar text-dark d-block p-2 rounded">Расходы</a>
           </details>
         </nav>
-        <p class="balance pt-3 pb-3 m-0">Баланс: <span class="text-primary"><span class="balance-number">500</span>$</span></p>
+        <p class="balance pt-3 pb-3 m-0">Баланс: <span class="text-primary"><span class="balance-number"></span>$</span></p>
         <section class="person border-2 border-top d-flex justify-content-center">
-          <figure class="d-flex align-items-center m-0 p-3">
+          <figure class="d-flex align-items-center justify-content-center m-0 p-3 w-100">
             <img src="src/static/images/person-icon.png" alt="person-icon" class="img-fluid">
-            <p class="user-name m-0 ms-3 w-100 text-truncate">Николай Устимов</p>
+            <p class="user-name m-0 ms-3"></p>
           </figure>
         </section>
       </div>
     </header>
 
-    <section id="content-layout" class="col-12 col-md-9 col-lg-10 ms-0 me-0 ms-md-auto me-md-auto ps-3 pe-3 pb-4 section-content"></section>
+    <section id="contentLayout" class="col-12 col-md-9 col-lg-10 ms-0 me-0 ms-md-auto me-md-auto ps-3 pe-3 pb-4 section-content"></section>
 
   </div>
 </main>
