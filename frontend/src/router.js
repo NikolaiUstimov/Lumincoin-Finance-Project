@@ -8,6 +8,9 @@ import {AuthUtils} from "./utils/auth-utils.js";
 import {Revenue} from "./components/revenues/revenues.js";
 import {RevenueAdd} from "./components/revenues/revenue-add.js";
 import {RevenueEdit} from "./components/revenues/revenue-edit.js";
+import {Expenses} from "./components/expenses/expenses.js";
+import {ExpenseAdd} from "./components/expenses/expense-add.js";
+import {ExpenseEdit} from "./components/expenses/expense-edit.js";
 
 export class Router {
   constructor() {
@@ -89,7 +92,9 @@ export class Router {
         layout: 'src/templates/layout.html',
         styles: ['src/styles/expenses/expenses.css'],
         scripts: [],
-        load: () => {}
+        load: () => {
+          new Expenses();
+        }
       },
       {
         route: '#/expense-add',
@@ -98,7 +103,9 @@ export class Router {
         layout: 'src/templates/layout.html',
         styles: ['src/styles/expenses/expenses-add.css'],
         scripts: [],
-        load: () => {}
+        load: () => {
+          new ExpenseAdd();
+        }
       },
       {
         route: '#/expense-edit',
@@ -107,10 +114,12 @@ export class Router {
         layout: 'src/templates/layout.html',
         styles: ['src/styles/expenses/expenses-edit.css'],
         scripts: [],
-        load: () => {}
+        load: () => {
+          new ExpenseEdit();
+        }
       },
       {
-        route: '#/general-finance',
+        route: '#/all-finance',
         title: 'Доходы и Расходы',
         template: 'src/templates/general-finance/general-finance.html',
         layout: 'src/templates/layout.html',
@@ -119,7 +128,7 @@ export class Router {
         load: () => {}
       },
       {
-        route: '#/general-finance-add',
+        route: '#/all-finance-add',
         title: 'Создание дохода/расхода',
         template: 'src/templates/general-finance/general-finance-add.html',
         layout: 'src/templates/layout.html',
@@ -128,7 +137,7 @@ export class Router {
         load: () => {}
       },
       {
-        route: '#/general-finance-edit',
+        route: '#/all-finance-edit',
         title: 'Редактирование дохода/расхода',
         template: 'src/templates/general-finance/general-finance-edit.html',
         layout: 'src/templates/layout.html',

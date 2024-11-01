@@ -1,18 +1,19 @@
 import {HttpService} from "../../services/http-service.js";
 import config from "../../config/config.js";
 
-export class Revenue {
+export class Expenses {
   constructor() {
     this.cardBoxElement = document.querySelector('.card-box');
     this.modalElement = document.getElementById('modal');
     this.modalBtnRemoveElement = document.getElementById('btnRemove');
     this.modalBtnCancelElement = document.getElementById('btnCancel');
-    this.showCardRevenues().then();
+
+    this.showCardExpenses().then();
   }
 
-  async showCardRevenues() {
+  async showCardExpenses() {
     try {
-      const result = await HttpService.request(config.host + '/categories/income');
+      const result = await HttpService.request(config.host + '/categories/expense');
       console.log(result);
       if (result && !result.error) {
         result.forEach(category => {
@@ -23,7 +24,7 @@ export class Revenue {
           <div class="card-body flex-grow-1">
             <h4 class="card-title mb-3">${category.title}</h4>
             <div class="action d-flex flex-column flex-sm-row gap-2">
-              <a href="#/revenue-edit?id=${category.id}" class="btn btn-primary">Редактировать</a>
+              <a href="#/expense-edit?id=${category.id}" class="btn btn-primary">Редактировать</a>
               <button id="deleteCategory" class="btn btn-danger delete-category">Удалить</button>
             </div>
           </div>`;
@@ -32,7 +33,7 @@ export class Revenue {
             this.modalElement.classList.add('open');
 
             this.modalBtnRemoveElement.onclick = () => {
-              this.deleteCardRevenue(category.id, cardElement);
+              this.deleteCardExpense(category.id, cardElement);
               this.modalElement.classList.remove('open');
             }
 
@@ -45,7 +46,7 @@ export class Revenue {
         });
 
         let addCategoryElement = document.createElement("a");
-        addCategoryElement.href = "#/revenue-add";
+        addCategoryElement.href = "#/expense-add";
         addCategoryElement.classList.add("btn", "btn-add-revenue", "border", "border-1");
         addCategoryElement.innerHTML = `<img src="src/static/images/svg/plus-mini-1523-svgrepo-com.svg" alt="plus" width="15px" height="15px">`;
         this.cardBoxElement.appendChild(addCategoryElement);
@@ -55,9 +56,9 @@ export class Revenue {
     }
   }
 
-  async deleteCardRevenue(id, cardElement) {
+  async deleteCardExpense(id, cardElement) {
     try {
-      const result = await HttpService.request(config.host + '/categories/income/' + id, 'DELETE');
+      const result = await HttpService.request(config.host + '/categories/expense/' + id, 'DELETE');
       if (result) {
         cardElement.remove();
       } else {
