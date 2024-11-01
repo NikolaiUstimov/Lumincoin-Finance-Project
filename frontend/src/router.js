@@ -6,6 +6,8 @@ import config from "./config/config.js";
 import {HttpService} from "./services/http-service.js";
 import {AuthUtils} from "./utils/auth-utils.js";
 import {Revenue} from "./components/revenues/revenues.js";
+import {RevenueAdd} from "./components/revenues/revenue-add.js";
+import {RevenueEdit} from "./components/revenues/revenue-edit.js";
 
 export class Router {
   constructor() {
@@ -42,7 +44,7 @@ export class Router {
         template: 'src/templates/main.html',
         layout: 'src/templates/layout.html',
         styles: ['src/styles/main.css'],
-        scripts: ['node_modules/chart.js/dist/chart.umd.js', 'src/components/lib-chart.js'],
+        // scripts: ['node_modules/chart.js/dist/chart.umd.js', 'src/components/lib-chart.js'],
         load: () => {
           new Main();
         }
@@ -59,22 +61,26 @@ export class Router {
         }
       },
       {
-        route: '#/revenues-add',
+        route: '#/revenue-add',
         title: 'Создание дохода',
         template: 'src/templates/revenues/revenues-add.html',
         layout: 'src/templates/layout.html',
         styles: ['src/styles/revenues/revenues-add.css'],
         scripts: [],
-        load: () => {}
+        load: () => {
+          new RevenueAdd();
+        }
       },
       {
-        route: '#/revenues-edit',
+        route: '#/revenue-edit',
         title: 'Редактирование дохода',
         template: 'src/templates/revenues/revenues-edit.html',
         layout: 'src/templates/layout.html',
         styles: ['src/styles/revenues/revenues-edit.css'],
         scripts: [],
-        load: () => {}
+        load: () => {
+          new RevenueEdit();
+        }
       },
       {
         route: '#/expenses',
@@ -86,7 +92,7 @@ export class Router {
         load: () => {}
       },
       {
-        route: '#/expenses-add',
+        route: '#/expense-add',
         title: 'Создание расхода',
         template: 'src/templates/expenses/expenses-add.html',
         layout: 'src/templates/layout.html',
@@ -95,7 +101,7 @@ export class Router {
         load: () => {}
       },
       {
-        route: '#/expenses-edit',
+        route: '#/expense-edit',
         title: 'Редактирование расхода',
         template: 'src/templates/expenses/expenses-edit.html',
         layout: 'src/templates/layout.html',
@@ -137,7 +143,7 @@ export class Router {
   }
 
   async openRoute() {
-    const hashRoute = window.location.hash;
+    const hashRoute = window.location.hash.split('?')[0];
     console.log("Текущий хеш:", hashRoute);
     const newRoute = this.routes.find(item => {
       return item.route === hashRoute;

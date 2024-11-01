@@ -2,12 +2,13 @@
 <div class="card-box d-flex flex-wrap gap-4">
 	<div class="card border-0">
 		<div class="card-body p-0 flex-grow-1">
-			<div class="input-group mb-3">
-				<input type="text" class="form-control" placeholder="Название...">
-			</div>
+			<fieldset class="input-group mb-3">
+				<input id="inputCategoryName" type="text" class="form-control" placeholder="Название...">
+				<p id="inputCategoryNameFeedback" class="invalid-feedback m-0">Введите название категории"</p>
+			</fieldset>
 			<div class="action d-flex flex-column flex-sm-row gap-2">
-				<a href="#" class="btn btn-success">Создать</a>
-				<a href="#" class="btn btn-danger">Отмена</a>
+				<button id="categoryAdd" class="btn btn-success">Создать</button>
+				<button id="categoryAddBack" class="btn btn-danger">Отмена</button>
 			</div>
 		</div>
 	</div>
