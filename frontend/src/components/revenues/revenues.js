@@ -47,7 +47,7 @@ export class Revenue {
         let addCategoryElement = document.createElement("a");
         addCategoryElement.href = "#/revenue-add";
         addCategoryElement.classList.add("btn", "btn-add-revenue", "border", "border-1");
-        addCategoryElement.innerHTML = `<img src="src/static/images/svg/plus-mini-1523-svgrepo-com.svg" alt="plus" width="15px" height="15px">`;
+        addCategoryElement.innerHTML = `<img src="images/svg/plus-mini-1523-svgrepo-com.svg" alt="plus" width="15px" height="15px">`;
         this.cardBoxElement.appendChild(addCategoryElement);
       }
     } catch (e) {

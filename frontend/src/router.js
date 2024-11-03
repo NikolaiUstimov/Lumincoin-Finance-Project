@@ -11,6 +11,8 @@ import {RevenueEdit} from "./components/revenues/revenue-edit.js";
 import {Expenses} from "./components/expenses/expenses.js";
 import {ExpenseAdd} from "./components/expenses/expense-add.js";
 import {ExpenseEdit} from "./components/expenses/expense-edit.js";
+import {AllFinance} from "./components/all-finance/all-finance.js";
+import {AllFinanceEdit} from "./components/all-finance/all-finance-edit.js";
 
 export class Router {
   constructor() {
@@ -20,7 +22,7 @@ export class Router {
       {
         route: '#/signup',
         title: 'Регистрация',
-        template: 'src/templates/signup.html',
+        template: '/templates/signup.html',
         layout: false,
         load: () => {
           new SignUp();
@@ -29,7 +31,7 @@ export class Router {
       {
         route: '#/login',
         title: 'Вход',
-        template: 'src/templates/login.html',
+        template: '/templates/login.html',
         layout: false,
         load: () => {
           new Login();
@@ -44,10 +46,10 @@ export class Router {
       {
         route: '#/main',
         title: 'Главная',
-        template: 'src/templates/main.html',
-        layout: 'src/templates/layout.html',
-        styles: ['src/styles/main.css'],
-        // scripts: ['node_modules/chart.js/dist/chart.umd.js', 'src/components/lib-chart.js'],
+        template: '/templates/main.html',
+        layout: '/templates/layout.html',
+        styles: ['/styles/main.css'],
+        scripts: [],
         load: () => {
           new Main();
         }
@@ -55,9 +57,9 @@ export class Router {
       {
         route: '#/revenues',
         title: 'Доходы',
-        template: 'src/templates/revenues/revenues.html',
-        layout: 'src/templates/layout.html',
-        styles: ['src/styles/revenues/revenues.css'],
+        template: '/templates/revenues/revenues.html',
+        layout: '/templates/layout.html',
+        styles: ['/styles/revenues/revenues.css'],
         scripts: [],
         load: () => {
           new Revenue();
@@ -66,9 +68,9 @@ export class Router {
       {
         route: '#/revenue-add',
         title: 'Создание дохода',
-        template: 'src/templates/revenues/revenues-add.html',
-        layout: 'src/templates/layout.html',
-        styles: ['src/styles/revenues/revenues-add.css'],
+        template: '/templates/revenues/revenues-add.html',
+        layout: '/templates/layout.html',
+        styles: ['/styles/revenues/revenues-add.css'],
         scripts: [],
         load: () => {
           new RevenueAdd();
@@ -77,9 +79,9 @@ export class Router {
       {
         route: '#/revenue-edit',
         title: 'Редактирование дохода',
-        template: 'src/templates/revenues/revenues-edit.html',
-        layout: 'src/templates/layout.html',
-        styles: ['src/styles/revenues/revenues-edit.css'],
+        template: '/templates/revenues/revenues-edit.html',
+        layout: '/templates/layout.html',
+        styles: ['/styles/revenues/revenues-edit.css'],
         scripts: [],
         load: () => {
           new RevenueEdit();
@@ -88,9 +90,9 @@ export class Router {
       {
         route: '#/expenses',
         title: 'Расходы',
-        template: 'src/templates/expenses/expenses.html',
-        layout: 'src/templates/layout.html',
-        styles: ['src/styles/expenses/expenses.css'],
+        template: '/templates/expenses/expenses.html',
+        layout: '/templates/layout.html',
+        styles: ['/styles/expenses/expenses.css'],
         scripts: [],
         load: () => {
           new Expenses();
@@ -99,9 +101,9 @@ export class Router {
       {
         route: '#/expense-add',
         title: 'Создание расхода',
-        template: 'src/templates/expenses/expenses-add.html',
-        layout: 'src/templates/layout.html',
-        styles: ['src/styles/expenses/expenses-add.css'],
+        template: '/templates/expenses/expenses-add.html',
+        layout: '/templates/layout.html',
+        styles: ['/styles/expenses/expenses-add.css'],
         scripts: [],
         load: () => {
           new ExpenseAdd();
@@ -110,9 +112,9 @@ export class Router {
       {
         route: '#/expense-edit',
         title: 'Редактирование расхода',
-        template: 'src/templates/expenses/expenses-edit.html',
-        layout: 'src/templates/layout.html',
-        styles: ['src/styles/expenses/expenses-edit.css'],
+        template: '/templates/expenses/expenses-edit.html',
+        layout: '/templates/layout.html',
+        styles: ['/styles/expenses/expenses-edit.css'],
         scripts: [],
         load: () => {
           new ExpenseEdit();
@@ -121,29 +123,33 @@ export class Router {
       {
         route: '#/all-finance',
         title: 'Доходы и Расходы',
-        template: 'src/templates/general-finance/general-finance.html',
-        layout: 'src/templates/layout.html',
-        styles: ['src/styles/general-finance/general-finance.css'],
+        template: '/templates/all-finance/all-finance.html',
+        layout: '/templates/layout.html',
+        styles: ['/styles/all-finance/all-finance.css'],
         scripts: [],
-        load: () => {}
+        load: () => {
+          new AllFinance();
+        }
       },
       {
         route: '#/all-finance-add',
         title: 'Создание дохода/расхода',
-        template: 'src/templates/general-finance/general-finance-add.html',
-        layout: 'src/templates/layout.html',
-        styles: ['src/styles/general-finance/general-finance-add.css'],
+        template: '/templates/all-finance/all-finance-add.html',
+        layout: '/templates/layout.html',
+        styles: ['/styles/all-finance/all-finance-add.css'],
         scripts: [],
         load: () => {}
       },
       {
         route: '#/all-finance-edit',
         title: 'Редактирование дохода/расхода',
-        template: 'src/templates/general-finance/general-finance-edit.html',
-        layout: 'src/templates/layout.html',
-        styles: ['src/styles/general-finance/general-finance-edit.css'],
+        template: '/templates/all-finance/all-finance-edit.html',
+        layout: '/templates/layout.html',
+        styles: ['/styles/all-finance/all-finance-edit.css'],
         scripts: [],
-        load: () => {}
+        load: () => {
+          new AllFinanceEdit();
+        }
       },
     ];
 

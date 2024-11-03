@@ -1,13 +1,16 @@
 import {HttpService} from "../../services/http-service.js";
 import config from "../../config/config.js";
+import {UrlUtils} from "../../utils/urliutils.js";
 
 export class ExpenseEdit {
   constructor() {
     this.inputNameCategoryElement = document.getElementById('inputCategoryName');
     this.categorySaveElement = document.getElementById('categorySave');
     this.categorySaveBackElement = document.getElementById('categorySaveBack');
-    const urlParams = new URLSearchParams(window.location.hash.split('?')[1]);
-    const id = urlParams.get('id');
+    const id = UrlUtils.getUrlParams('id');
+    if (!id) {
+      window.location.href = '#/expenses';
+    }
 
     this.getCategory(id).then();
     this.categorySaveElement.addEventListener('click', this.updateCategory.bind(this, id));

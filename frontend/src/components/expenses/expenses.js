@@ -19,7 +19,6 @@ export class Expenses {
         result.forEach(category => {
           let cardElement = document.createElement("div");
           cardElement.classList.add("card", "p-1");
-          cardElement.setAttribute("data-id", category.id);
           cardElement.innerHTML = `
           <div class="card-body flex-grow-1">
             <h4 class="card-title mb-3">${category.title}</h4>
@@ -48,7 +47,7 @@ export class Expenses {
         let addCategoryElement = document.createElement("a");
         addCategoryElement.href = "#/expense-add";
         addCategoryElement.classList.add("btn", "btn-add-revenue", "border", "border-1");
-        addCategoryElement.innerHTML = `<img src="src/static/images/svg/plus-mini-1523-svgrepo-com.svg" alt="plus" width="15px" height="15px">`;
+        addCategoryElement.innerHTML = `<img src="images/svg/plus-mini-1523-svgrepo-com.svg" alt="plus" width="15px" height="15px">`;
         this.cardBoxElement.appendChild(addCategoryElement);
       }
     } catch (e) {
@@ -64,7 +63,6 @@ export class Expenses {
       } else {
         throw new Error(result.message);
       }
-      console.log(`Элемент c id: ${id} удалён`);
     } catch (e) {
       throw new Error("Ошибка удаления категории " + e)
     }

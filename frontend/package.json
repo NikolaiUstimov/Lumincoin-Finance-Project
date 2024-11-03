@@ -3,13 +3,20 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "http-server"
+    "start": "http-server ./dist",
+    "build": "webpack",
+    "dev": "webpack serve --open"
   },
   "author": "NikolaiUstimov",
   "license": "ISC",
   "description": "",
   "devDependencies": {
     "chart.js": "^4.4.4",
-    "http-server": "^14.1.1"
+    "copy-webpack-plugin": "^12.0.2",
+    "html-webpack-plugin": "^5.6.3",
+    "http-server": "^14.1.1",
+    "webpack": "^5.96.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.1.0"
   }
 }
