@@ -11,6 +11,7 @@ export class Expenses {
     this.showCardExpenses().then();
   }
 
+  //Отрисовка карточек
   async showCardExpenses() {
     try {
       const result = await HttpService.request(config.host + '/categories/expense');
@@ -28,6 +29,7 @@ export class Expenses {
             </div>
           </div>`;
 
+          //Взаимодействие с модальным окном
           cardElement.querySelector('.delete-category').addEventListener('click', () => {
             this.modalElement.classList.add('open');
 
@@ -55,6 +57,7 @@ export class Expenses {
     }
   }
 
+  //Удаление карточки
   async deleteCardExpense(id, cardElement) {
     try {
       const result = await HttpService.request(config.host + '/categories/expense/' + id, 'DELETE');

@@ -10,6 +10,7 @@ export class Revenue {
     this.showCardRevenues().then();
   }
 
+  //Отрисовка карточек
   async showCardRevenues() {
     try {
       const result = await HttpService.request(config.host + '/categories/income');
@@ -28,6 +29,7 @@ export class Revenue {
             </div>
           </div>`;
 
+          //Взаимодействие с модальным окном
           cardElement.querySelector('.delete-category').addEventListener('click', () => {
             this.modalElement.classList.add('open');
 
@@ -55,6 +57,7 @@ export class Revenue {
     }
   }
 
+  //Запрос на удаление категории
   async deleteCardRevenue(id, cardElement) {
     try {
       const result = await HttpService.request(config.host + '/categories/income/' + id, 'DELETE');
@@ -63,7 +66,6 @@ export class Revenue {
       } else {
         throw new Error(result.message);
       }
-      console.log(`Элемент c id: ${id} удалён`);
     } catch (e) {
       throw new Error("Ошибка удаления категории " + e)
     }

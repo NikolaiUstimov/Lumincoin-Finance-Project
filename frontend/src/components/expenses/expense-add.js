@@ -14,6 +14,7 @@ export class ExpenseAdd {
     });
   }
 
+  //Валидация полей
   validateForm() {
     let isValid = true;
 
@@ -23,10 +24,10 @@ export class ExpenseAdd {
       this.inputNameCategoryElement.classList.add('is-invalid');
       isValid = false;
     }
-
     return isValid;
   }
 
+  //Запрос на добавление категории
   async addCategory() {
     if (this.validateForm()) {
       try {

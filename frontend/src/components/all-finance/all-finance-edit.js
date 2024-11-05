@@ -28,6 +28,7 @@ export class AllFinanceEdit {
     });
   }
 
+  //Получение категорий для select
   async getCategoryOption(type) {
     const options = await CommonUtils.getOperationCategory(type);
     this.selectCategoryElement.innerHTML = '';
@@ -40,11 +41,11 @@ export class AllFinanceEdit {
     }
   }
 
+  //Получение выбранной категории по id
   async getCategory(id) {
     try {
       const result = await HttpService.request(config.host + '/operations/' + id);
       if (result && !result.error) {
-        console.log("Категории", result);
         this.selectTypeElement.querySelectorAll('option').forEach(element => {
           if (result.type === element.value) {
             element.selected = true;
@@ -65,6 +66,7 @@ export class AllFinanceEdit {
     }
   }
 
+  //Если изменён тип, то меняем категории в select
   async updateCategoryOptions() {
     const selectedCategoryType = this.selectTypeElement.value;
     if (selectedCategoryType) {
@@ -72,6 +74,7 @@ export class AllFinanceEdit {
     }
   }
 
+  //Валидация полей
   validateForm() {
     let isValid = true;
 
@@ -82,22 +85,22 @@ export class AllFinanceEdit {
       isValid = false;
     }
 
-    if (this.inputDateElement.value.trim()) {
+    if (this.inputDateElement.value.trim() && this.inputDateElement.value.match(/[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])/)) {
       this.inputDateElement.classList.remove('is-invalid');
     } else {
       this.inputDateElement.classList.add('is-invalid');
       isValid = false;
     }
-
     return isValid;
   }
 
+  //Получение id из атрибута выбранного option для категорий
   getOptionCategoryId() {
     const selectedOption = this.selectCategoryElement.querySelector(`option[value="${this.selectCategoryElement.value}"]`);
-    console.log(selectedOption);
     return selectedOption ? selectedOption.getAttribute('data-id') : null;
   }
 
+  //Запрос на обновление операции
   async updateCategory(id) {
     if (this.validateForm()) {
       try {

@@ -19,6 +19,7 @@ export class ExpenseEdit {
     });
   }
 
+  //Получение выбранной категории по id
   async getCategory(id) {
     try {
       const result = await HttpService.request(config.host + '/categories/expense/' + id);
@@ -30,6 +31,7 @@ export class ExpenseEdit {
     }
   }
 
+  //Валидация полей
   validateForm() {
     let isValid = true;
 
@@ -43,6 +45,7 @@ export class ExpenseEdit {
     return isValid;
   }
 
+  //Запрос на обновление категории
   async updateCategory(id) {
     if (this.validateForm()) {
       try {

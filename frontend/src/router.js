@@ -13,6 +13,7 @@ import {ExpenseAdd} from "./components/expenses/expense-add.js";
 import {ExpenseEdit} from "./components/expenses/expense-edit.js";
 import {AllFinance} from "./components/all-finance/all-finance.js";
 import {AllFinanceEdit} from "./components/all-finance/all-finance-edit.js";
+import {AllFinanceAdd} from "./components/all-finance/all-finance-add.js";
 
 export class Router {
   constructor() {
@@ -49,7 +50,6 @@ export class Router {
         template: '/templates/main.html',
         layout: '/templates/layout.html',
         styles: ['/styles/main.css'],
-        scripts: [],
         load: () => {
           new Main();
         }
@@ -60,7 +60,6 @@ export class Router {
         template: '/templates/revenues/revenues.html',
         layout: '/templates/layout.html',
         styles: ['/styles/revenues/revenues.css'],
-        scripts: [],
         load: () => {
           new Revenue();
         }
@@ -71,7 +70,6 @@ export class Router {
         template: '/templates/revenues/revenues-add.html',
         layout: '/templates/layout.html',
         styles: ['/styles/revenues/revenues-add.css'],
-        scripts: [],
         load: () => {
           new RevenueAdd();
         }
@@ -82,7 +80,6 @@ export class Router {
         template: '/templates/revenues/revenues-edit.html',
         layout: '/templates/layout.html',
         styles: ['/styles/revenues/revenues-edit.css'],
-        scripts: [],
         load: () => {
           new RevenueEdit();
         }
@@ -93,7 +90,6 @@ export class Router {
         template: '/templates/expenses/expenses.html',
         layout: '/templates/layout.html',
         styles: ['/styles/expenses/expenses.css'],
-        scripts: [],
         load: () => {
           new Expenses();
         }
@@ -104,7 +100,6 @@ export class Router {
         template: '/templates/expenses/expenses-add.html',
         layout: '/templates/layout.html',
         styles: ['/styles/expenses/expenses-add.css'],
-        scripts: [],
         load: () => {
           new ExpenseAdd();
         }
@@ -115,7 +110,6 @@ export class Router {
         template: '/templates/expenses/expenses-edit.html',
         layout: '/templates/layout.html',
         styles: ['/styles/expenses/expenses-edit.css'],
-        scripts: [],
         load: () => {
           new ExpenseEdit();
         }
@@ -126,7 +120,6 @@ export class Router {
         template: '/templates/all-finance/all-finance.html',
         layout: '/templates/layout.html',
         styles: ['/styles/all-finance/all-finance.css'],
-        scripts: [],
         load: () => {
           new AllFinance();
         }
@@ -137,8 +130,9 @@ export class Router {
         template: '/templates/all-finance/all-finance-add.html',
         layout: '/templates/layout.html',
         styles: ['/styles/all-finance/all-finance-add.css'],
-        scripts: [],
-        load: () => {}
+        load: () => {
+          new AllFinanceAdd();
+        }
       },
       {
         route: '#/all-finance-edit',
@@ -146,7 +140,6 @@ export class Router {
         template: '/templates/all-finance/all-finance-edit.html',
         layout: '/templates/layout.html',
         styles: ['/styles/all-finance/all-finance-edit.css'],
-        scripts: [],
         load: () => {
           new AllFinanceEdit();
         }
@@ -154,7 +147,6 @@ export class Router {
     ];
 
     this.currentStyles = [];
-    this.currentScripts = [];
   }
 
   async openRoute() {
@@ -186,18 +178,15 @@ export class Router {
       content.innerHTML = await fetch(newRoute.template).then(response => response.text());
 
       //Подгружаем имя и баланс
+      this.activateMenuItem(newRoute);
       this.showBalance().then();
       this.showUserName().then();
+      this.logout();
     }
 
     //Подключение стилей
     if (newRoute.styles) {
       this.linkStyles(newRoute.styles);
-    }
-
-    //Подключение скриптов
-    if (newRoute.scripts) {
-      this.linkScripts(newRoute.scripts);
     }
 
     //Отображение заголовка страницы
@@ -216,6 +205,25 @@ export class Router {
     }
   }
 
+  //Выход из системы
+  logout() {
+    const logoutElement = document.querySelectorAll(".person-out");
+    const logoutLink = document.querySelectorAll(".logout");
+
+    const toggleModalElement = () => {
+      logoutLink.forEach(el => {
+        el.classList.toggle("logout-open");
+      });
+    }
+
+    logoutElement.forEach(el => {
+      el.addEventListener("click", (e) => {
+        e.stopPropagation();
+        toggleModalElement();
+      });
+    });
+  }
+
   //Отображение баланса
   async showBalance() {
     this.balanceShowElement = document.querySelectorAll(".balance-number");
@@ -231,6 +239,28 @@ export class Router {
     }
   }
 
+  //Активация пунктов меню
+  activateMenuItem(route) {
+    const details = document.querySelectorAll("details");
+    //Массив с роутами для категорий
+    const openDetailsRoutes = ['#/revenues', '#/expenses', '#/revenue-add', '#/revenue-edit', '#/expense-add', '#/expense-edit'];
+
+    document.querySelectorAll('.layout .link-sidebar').forEach(item => {
+      let href = item.getAttribute('href');
+
+      if ((route.route.includes(href) && href !== '#/login' && href !== '#/signup')) {
+        item.classList.add('active-link');
+        // item.style.color = 'white';
+
+        if (openDetailsRoutes.includes(href)) {
+          details.forEach(details => details.setAttribute('open', 'open'));
+        }
+      } else {
+        item.classList.remove('active-link');
+      }
+    });
+  }
+
   //Подключение стилей
   linkStyles(styles) {
     const headElement = document.getElementsByTagName('head')[0];
@@ -243,27 +273,11 @@ export class Router {
     });
   }
 
-  //Подключение скриптов
-  linkScripts(scripts) {
-    const bodyElement = document.getElementsByTagName('body')[0];
-    scripts.forEach(scriptPath => {
-      const script = document.createElement('script');
-      script.src = scriptPath;
-      bodyElement.appendChild(script);
-      this.currentScripts.push(script);
-    });
-  }
-
-  //Удаление стилей и скриптов
+  //Удаление стилей
   removeCurrentResources() {
     this.currentStyles.forEach(styleElement => {
       styleElement.remove();
     });
     this.currentStyles = [];
-
-    this.currentScripts.forEach(scriptElement => {
-      scriptElement.remove();
-    });
-    this.currentScripts = [];
   }
 }

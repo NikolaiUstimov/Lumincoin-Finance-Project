@@ -14,6 +14,7 @@ export class RevenueAdd {
     })
   }
 
+  //Валидация полей
   validateForm() {
     let isValid = true;
 
@@ -23,10 +24,10 @@ export class RevenueAdd {
       this.inputNameCategoryElement.classList.add('is-invalid');
       isValid = false;
     }
-
     return isValid;
   }
 
+  //Запрос на добавление категории
   async addCategory() {
     if (this.validateForm()) {
       try {

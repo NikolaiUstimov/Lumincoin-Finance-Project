@@ -19,6 +19,7 @@ export class RevenueEdit {
     });
   }
 
+  //Получение выбранной категории по id
   async getCategory(id) {
     try {
       const result = await HttpService.request(config.host + '/categories/income/' + id, 'GET');
@@ -30,6 +31,7 @@ export class RevenueEdit {
     }
   }
 
+  //Валидация полей
   validateForm() {
     let isValid = true;
 
@@ -43,6 +45,7 @@ export class RevenueEdit {
     return isValid;
   }
 
+  //Запрос на обновление категории
   async updateCategory(id) {
     if (this.validateForm()) {
       try {

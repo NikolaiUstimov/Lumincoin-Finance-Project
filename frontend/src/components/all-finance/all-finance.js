@@ -11,14 +11,41 @@ export class AllFinance {
     this.modalElement = document.getElementById('modal');
     this.modalBtnRemoveElement = document.getElementById('btnRemove');
     this.modalBtnCancelElement = document.getElementById('btnCancel');
+    this.btnAddRevenueElement = document.getElementById('addRevenue');
+    this.btnAddExpenseElement = document.getElementById('addExpense');
 
+    this.btnAddRevenueElement.addEventListener('click', () => {
+      window.location.hash = '#/all-finance-add' + '?type=income';
+    });
+    this.btnAddExpenseElement.addEventListener('click', () => {
+      window.location.hash = '#/all-finance-add' + '?type=expense';
+    });
     this.btnEventListener();
     this.getPeriodData().then();
   }
 
-  validateForm() {
+  //Событие кликов по кнопкам фильтров
+  btnEventListener() {
+    this.btnPeriodElement.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const period = e.target.getAttribute('data-period');
 
+        this.resetValidation();
+        if (period === "interval") {
+          if (!this.validateForm()) {
+            e.preventDefault();
+            return;
+          }
+        }
+        this.getPeriodData(period).then();
+      });
+    });
+  }
+
+  //Валидация полей
+  validateForm() {
     let isValid = true;
+
     if (this.inputFromDate.value) {
       this.inputFromDate.classList.remove('is-invalid');
     } else {
@@ -32,27 +59,16 @@ export class AllFinance {
       this.inputToDate.classList.add('is-invalid');
       isValid = false;
     }
-
     return isValid;
   }
 
-  btnEventListener() {
-    this.btnPeriodElement.forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const period = e.target.getAttribute('data-period');
-        if (period === "interval") {
-          console.log(this.inputFromDate.value);
-          console.log(this.inputToDate.value);
-          if (!this.validateForm()) {
-            e.preventDefault();
-            return;
-          }
-        }
-        this.getPeriodData(period).then();
-      });
-    });
+  //Сброс валидационных сообщений
+  resetValidation() {
+    this.inputFromDate.classList.remove('is-invalid');
+    this.inputToDate.classList.remove('is-invalid');
   }
 
+  //Получение данных по кнопкам фильтров
   async getPeriodData(period) {
     let url;
     try {
@@ -66,7 +82,6 @@ export class AllFinance {
       }
       const result = await HttpService.request(url);
       if (result) {
-        console.log(result);
         this.showOperationsInTable(result)
       }
     } catch (e) {
@@ -74,6 +89,7 @@ export class AllFinance {
     }
   }
 
+  //Отрисовка таблицы
   showOperationsInTable(data) {
     data.forEach((element, i) => {
       let trElement = document.createElement("tr");
@@ -118,6 +134,7 @@ export class AllFinance {
     });
   }
 
+  //Запрос на удаление операции
   async deleteCategory(id, trElement) {
     try {
       const result = await HttpService.request(config.host + '/operations/' + id, 'DELETE');
