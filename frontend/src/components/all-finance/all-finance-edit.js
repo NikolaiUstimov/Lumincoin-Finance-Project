@@ -15,6 +15,7 @@ export class AllFinanceEdit {
     const id = UrlUtils.getUrlParams('id');
     if (!id) {
       window.location.href = '#/all-finance';
+      return;
     }
 
     this.getCategory(id).then();

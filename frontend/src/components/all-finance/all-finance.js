@@ -82,10 +82,10 @@ export class AllFinance {
       }
       const result = await HttpService.request(url);
       if (result) {
-        this.showOperationsInTable(result)
+        this.showOperationsInTable(result);
       }
     } catch (e) {
-      throw new Error("Ошибка при запросе данных", e)
+      throw new Error("Ошибка при запросе данных", e);
     }
   }
 
@@ -116,6 +116,7 @@ export class AllFinance {
         </a>
       `;
 
+      //Событие клика по кнопке удаления строки таблицы
       trElement.querySelector('.delete-category').addEventListener('click', () => {
         this.modalElement.classList.add('open');
 
@@ -127,7 +128,6 @@ export class AllFinance {
         this.modalBtnCancelElement.onclick = () => {
           this.modalElement.classList.remove('open');
         }
-
       });
 
       this.tableBodyElement.appendChild(trElement);
@@ -144,7 +144,7 @@ export class AllFinance {
         throw new Error(result.message);
       }
     } catch (e) {
-      throw new Error("Ошибка удаления категории " + e)
+      throw new Error("Ошибка удаления категории " + e);
     }
   }
 }

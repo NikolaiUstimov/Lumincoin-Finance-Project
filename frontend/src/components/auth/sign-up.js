@@ -12,18 +12,21 @@ export class SignUp {
 
     if (localStorage.getItem(AuthUtils.accessTokenKey)) {
       window.location.href = '#/main';
+      return;
     }
 
     this.emailInputElement.addEventListener('keydown', this.preventSpace.bind(this));
     this.buttonSubmitElement.addEventListener('click', this.signUp.bind(this));
   }
 
+  //Запрет ввода пробелов
   preventSpace(e) {
     if (e.keyCode === 32) {
       e.preventDefault();
     }
   }
 
+  //Валидация формы
   validateForm() {
     let isValid = true;
 
@@ -54,10 +57,10 @@ export class SignUp {
       this.repeatPasswordInputElement.classList.add('is-invalid');
       isValid = false;
     }
-
     return isValid;
   }
 
+  //Регистрация в системе
   async signUp(e) {
     e.preventDefault();
     if (this.validateForm()) {

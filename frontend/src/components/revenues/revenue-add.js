@@ -1,5 +1,6 @@
 import {HttpService} from "../../services/http-service.js";
 import config from "../../config/config.js";
+import {MenuLinkUtils} from "../../utils/menu-link-utils.js";
 
 export class RevenueAdd {
   constructor() {
@@ -8,10 +9,18 @@ export class RevenueAdd {
     this.btnCategoryAddBackElement = document.getElementById('categoryAddBack');
 
     this.btnCategoryAddElement.addEventListener('click', this.addCategory.bind(this));
-
     this.btnCategoryAddBackElement.addEventListener('click', () => {
       window.location.href = '#/revenues';
-    })
+    });
+
+    this.activeLink();
+  }
+
+  //Активация пунктов меню
+  activeLink() {
+    const details = document.querySelectorAll("details");
+    const link = document.querySelectorAll('.link-sidebar');
+    MenuLinkUtils.activeLink(details, link, '#/revenues');
   }
 
   //Валидация полей

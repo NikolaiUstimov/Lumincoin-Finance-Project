@@ -3,10 +3,14 @@ import config from "../../config/config.js";
 
 export class Revenue {
   constructor() {
+    window.addEventListener('load', () => {
+      document.querySelector('.modal').classList.remove('hide');
+    });
     this.cardBoxElement = document.querySelector('.card-box');
     this.modalElement = document.getElementById('modal');
     this.modalBtnRemoveElement = document.getElementById('btnRemove');
     this.modalBtnCancelElement = document.getElementById('btnCancel');
+
     this.showCardRevenues().then();
   }
 
@@ -41,7 +45,6 @@ export class Revenue {
             this.modalBtnCancelElement.onclick = () => {
               this.modalElement.classList.remove('open');
             }
-
           });
           this.cardBoxElement.appendChild(cardElement);
         });
@@ -67,7 +70,7 @@ export class Revenue {
         throw new Error(result.message);
       }
     } catch (e) {
-      throw new Error("Ошибка удаления категории " + e)
+      throw new Error("Ошибка удаления категории " + e);
     }
   }
 }

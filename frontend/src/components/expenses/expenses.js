@@ -15,7 +15,6 @@ export class Expenses {
   async showCardExpenses() {
     try {
       const result = await HttpService.request(config.host + '/categories/expense');
-      console.log(result);
       if (result && !result.error) {
         result.forEach(category => {
           let cardElement = document.createElement("div");
@@ -67,7 +66,7 @@ export class Expenses {
         throw new Error(result.message);
       }
     } catch (e) {
-      throw new Error("Ошибка удаления категории " + e)
+      throw new Error("Ошибка удаления категории " + e);
     }
   }
 }

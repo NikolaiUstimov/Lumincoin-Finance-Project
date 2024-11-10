@@ -11,6 +11,7 @@ export class Login {
 
     if (localStorage.getItem(AuthUtils.accessTokenKey)) {
       window.location.href = '#/main';
+      return;
     }
 
     if (localStorage.getItem('userEmail')) {
@@ -43,12 +44,14 @@ export class Login {
     return isValid;
   }
 
+  //Запрет ввода пробелов
   preventSpace(e) {
     if (e.keyCode === 32) {
       e.preventDefault();
     }
   }
 
+  //Вход в систему
   async login(e) {
     e.preventDefault();
     if (this.validateForm()) {
@@ -89,5 +92,4 @@ export class Login {
       this.checkInputElement.checked = false;
     }
   }
-
 }

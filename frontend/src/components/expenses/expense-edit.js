@@ -1,6 +1,7 @@
 import {HttpService} from "../../services/http-service.js";
 import config from "../../config/config.js";
 import {UrlUtils} from "../../utils/urliutils.js";
+import {MenuLinkUtils} from "../../utils/menu-link-utils.js";
 
 export class ExpenseEdit {
   constructor() {
@@ -17,6 +18,14 @@ export class ExpenseEdit {
     this.categorySaveBackElement.addEventListener('click', (e) => {
       window.location.href = '#/expenses';
     });
+    this.activeLink();
+  }
+
+  //Активация пунктов меню
+  activeLink() {
+    const details = document.querySelectorAll("details");
+    const link = document.querySelectorAll('.link-sidebar');
+    MenuLinkUtils.activeLink(details, link, '#/expenses');
   }
 
   //Получение выбранной категории по id
@@ -41,7 +50,6 @@ export class ExpenseEdit {
       this.inputNameCategoryElement.classList.add('is-invalid');
       isValid = false;
     }
-
     return isValid;
   }
 

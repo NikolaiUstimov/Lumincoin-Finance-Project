@@ -149,9 +149,9 @@ export class Router {
     this.currentStyles = [];
   }
 
+  //Роутинг по страницам
   async openRoute() {
     const hashRoute = window.location.hash.split('?')[0];
-    console.log("Текущий хеш:", hashRoute);
     const newRoute = this.routes.find(item => {
       return item.route === hashRoute;
     });
@@ -166,7 +166,8 @@ export class Router {
       return;
     }
 
-    this.removeCurrentResources();
+    //Удаление текущих стилей страницы
+    this.removeCurrentStyles();
 
     //Отрисовка страниц с layout и без него
     if (newRoute.template) {
@@ -177,10 +178,12 @@ export class Router {
       }
       content.innerHTML = await fetch(newRoute.template).then(response => response.text());
 
-      //Подгружаем имя и баланс
+      //Активация пунктов меню
       this.activateMenuItem(newRoute);
+      //Подгружаем имя и баланс
       this.showBalance().then();
       this.showUserName().then();
+      //Выход из системы
       this.logout();
     }
 
@@ -190,7 +193,11 @@ export class Router {
     }
 
     //Отображение заголовка страницы
-    document.getElementById('titlePage').innerText = newRoute.title;
+    const titleElement = document.getElementById('titlePage');
+    if (titleElement) {
+      titleElement.innerText = newRoute.title;
+    }
+    //Выполнение функции загрузки функционала страницы
     if (typeof newRoute.load === 'function') {
       newRoute.load();
     }
@@ -243,14 +250,13 @@ export class Router {
   activateMenuItem(route) {
     const details = document.querySelectorAll("details");
     //Массив с роутами для категорий
-    const openDetailsRoutes = ['#/revenues', '#/expenses', '#/revenue-add', '#/revenue-edit', '#/expense-add', '#/expense-edit'];
+    const openDetailsRoutes = ['#/revenues', '#/expenses'];
 
     document.querySelectorAll('.layout .link-sidebar').forEach(item => {
       let href = item.getAttribute('href');
 
       if ((route.route.includes(href) && href !== '#/login' && href !== '#/signup')) {
         item.classList.add('active-link');
-        // item.style.color = 'white';
 
         if (openDetailsRoutes.includes(href)) {
           details.forEach(details => details.setAttribute('open', 'open'));
@@ -263,7 +269,7 @@ export class Router {
 
   //Подключение стилей
   linkStyles(styles) {
-    const headElement = document.getElementsByTagName('head')[0];
+    const headElement = document.querySelector('head');
     styles.forEach(stylePath => {
       const link = document.createElement('link');
       link.rel = 'stylesheet';
@@ -274,7 +280,7 @@ export class Router {
   }
 
   //Удаление стилей
-  removeCurrentResources() {
+  removeCurrentStyles() {
     this.currentStyles.forEach(styleElement => {
       styleElement.remove();
     });

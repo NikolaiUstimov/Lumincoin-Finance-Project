@@ -15,6 +15,7 @@ export class AllFinanceAdd {
     const type = UrlUtils.getUrlParams('type');
     if (!type) {
       window.location.href = '#/all-finance';
+      return;
     }
 
     this.selectedType(type);

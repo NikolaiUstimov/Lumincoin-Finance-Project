@@ -1,5 +1,6 @@
 import {HttpService} from "../../services/http-service.js";
 import config from "../../config/config.js";
+import {MenuLinkUtils} from "../../utils/menu-link-utils.js";
 
 export class ExpenseAdd {
   constructor() {
@@ -12,6 +13,14 @@ export class ExpenseAdd {
     this.btnCategoryAddBackElement.addEventListener('click', () => {
       window.location.href = '#/expenses';
     });
+    this.activeLink();
+  }
+
+  //Активация пунктов меню
+  activeLink() {
+    const details = document.querySelectorAll("details");
+    const link = document.querySelectorAll('.link-sidebar');
+    MenuLinkUtils.activeLink(details, link, '#/expenses');
   }
 
   //Валидация полей

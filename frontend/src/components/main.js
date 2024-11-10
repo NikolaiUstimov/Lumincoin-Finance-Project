@@ -35,7 +35,7 @@ export class Main {
     this.btnPeriodElement.forEach(btn => {
       btn.addEventListener('click', (e) => {
         const period = e.target.getAttribute('data-period');
-
+        //Сброс ошибок валидации
         this.resetValidation();
         if (period === "interval") {
           if (!this.validateForm()) {
