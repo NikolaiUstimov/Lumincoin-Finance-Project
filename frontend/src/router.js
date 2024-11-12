@@ -5,6 +5,15 @@ import {Main} from "./components/main.js";
 import config from "./config/config.js";
 import {HttpService} from "./services/http-service.js";
 import {AuthUtils} from "./utils/auth-utils.js";
+import {Revenue} from "./components/revenues/revenues.js";
+import {RevenueAdd} from "./components/revenues/revenue-add.js";
+import {RevenueEdit} from "./components/revenues/revenue-edit.js";
+import {Expenses} from "./components/expenses/expenses.js";
+import {ExpenseAdd} from "./components/expenses/expense-add.js";
+import {ExpenseEdit} from "./components/expenses/expense-edit.js";
+import {AllFinance} from "./components/all-finance/all-finance.js";
+import {AllFinanceEdit} from "./components/all-finance/all-finance-edit.js";
+import {AllFinanceAdd} from "./components/all-finance/all-finance-add.js";
 
 export class Router {
   constructor() {
@@ -14,7 +23,7 @@ export class Router {
       {
         route: '#/signup',
         title: 'Регистрация',
-        template: 'src/templates/signup.html',
+        template: '/templates/signup.html',
         layout: false,
         load: () => {
           new SignUp();
@@ -23,7 +32,7 @@ export class Router {
       {
         route: '#/login',
         title: 'Вход',
-        template: 'src/templates/login.html',
+        template: '/templates/login.html',
         layout: false,
         load: () => {
           new Login();
@@ -38,10 +47,9 @@ export class Router {
       {
         route: '#/main',
         title: 'Главная',
-        template: 'src/templates/main.html',
-        layout: 'src/templates/layout.html',
-        styles: ['src/styles/main.css'],
-        scripts: ['node_modules/chart.js/dist/chart.umd.js', 'src/components/lib-chart.js'],
+        template: '/templates/main.html',
+        layout: '/templates/layout.html',
+        styles: ['/styles/main.css'],
         load: () => {
           new Main();
         }
@@ -49,93 +57,101 @@ export class Router {
       {
         route: '#/revenues',
         title: 'Доходы',
-        template: 'src/templates/revenues/revenues.html',
-        layout: 'src/templates/layout.html',
-        styles: ['src/styles/revenues/revenues.css'],
-        scripts: [],
-        load: () => {}
+        template: '/templates/revenues/revenues.html',
+        layout: '/templates/layout.html',
+        styles: ['/styles/revenues/revenues.css'],
+        load: () => {
+          new Revenue();
+        }
       },
       {
-        route: '#/revenues-add',
+        route: '#/revenue-add',
         title: 'Создание дохода',
-        template: 'src/templates/revenues/revenues-add.html',
-        layout: 'src/templates/layout.html',
-        styles: ['src/styles/revenues/revenues-add.css'],
-        scripts: [],
-        load: () => {}
+        template: '/templates/revenues/revenues-add.html',
+        layout: '/templates/layout.html',
+        styles: ['/styles/revenues/revenues-add.css'],
+        load: () => {
+          new RevenueAdd();
+        }
       },
       {
-        route: '#/revenues-edit',
+        route: '#/revenue-edit',
         title: 'Редактирование дохода',
-        template: 'src/templates/revenues/revenues-edit.html',
-        layout: 'src/templates/layout.html',
-        styles: ['src/styles/revenues/revenues-edit.css'],
-        scripts: [],
-        load: () => {}
+        template: '/templates/revenues/revenues-edit.html',
+        layout: '/templates/layout.html',
+        styles: ['/styles/revenues/revenues-edit.css'],
+        load: () => {
+          new RevenueEdit();
+        }
       },
       {
         route: '#/expenses',
         title: 'Расходы',
-        template: 'src/templates/expenses/expenses.html',
-        layout: 'src/templates/layout.html',
-        styles: ['src/styles/expenses/expenses.css'],
-        scripts: [],
-        load: () => {}
+        template: '/templates/expenses/expenses.html',
+        layout: '/templates/layout.html',
+        styles: ['/styles/expenses/expenses.css'],
+        load: () => {
+          new Expenses();
+        }
       },
       {
-        route: '#/expenses-add',
+        route: '#/expense-add',
         title: 'Создание расхода',
-        template: 'src/templates/expenses/expenses-add.html',
-        layout: 'src/templates/layout.html',
-        styles: ['src/styles/expenses/expenses-add.css'],
-        scripts: [],
-        load: () => {}
+        template: '/templates/expenses/expenses-add.html',
+        layout: '/templates/layout.html',
+        styles: ['/styles/expenses/expenses-add.css'],
+        load: () => {
+          new ExpenseAdd();
+        }
       },
       {
-        route: '#/expenses-edit',
+        route: '#/expense-edit',
         title: 'Редактирование расхода',
-        template: 'src/templates/expenses/expenses-edit.html',
-        layout: 'src/templates/layout.html',
-        styles: ['src/styles/expenses/expenses-edit.css'],
-        scripts: [],
-        load: () => {}
+        template: '/templates/expenses/expenses-edit.html',
+        layout: '/templates/layout.html',
+        styles: ['/styles/expenses/expenses-edit.css'],
+        load: () => {
+          new ExpenseEdit();
+        }
       },
       {
-        route: '#/general-finance',
+        route: '#/all-finance',
         title: 'Доходы и Расходы',
-        template: 'src/templates/general-finance/general-finance.html',
-        layout: 'src/templates/layout.html',
-        styles: ['src/styles/general-finance/general-finance.css'],
-        scripts: [],
-        load: () => {}
+        template: '/templates/all-finance/all-finance.html',
+        layout: '/templates/layout.html',
+        styles: ['/styles/all-finance/all-finance.css'],
+        load: () => {
+          new AllFinance();
+        }
       },
       {
-        route: '#/general-finance-add',
+        route: '#/all-finance-add',
         title: 'Создание дохода/расхода',
-        template: 'src/templates/general-finance/general-finance-add.html',
-        layout: 'src/templates/layout.html',
-        styles: ['src/styles/general-finance/general-finance-add.css'],
-        scripts: [],
-        load: () => {}
+        template: '/templates/all-finance/all-finance-add.html',
+        layout: '/templates/layout.html',
+        styles: ['/styles/all-finance/all-finance-add.css'],
+        load: () => {
+          new AllFinanceAdd();
+        }
       },
       {
-        route: '#/general-finance-edit',
+        route: '#/all-finance-edit',
         title: 'Редактирование дохода/расхода',
-        template: 'src/templates/general-finance/general-finance-edit.html',
-        layout: 'src/templates/layout.html',
-        styles: ['src/styles/general-finance/general-finance-edit.css'],
-        scripts: [],
-        load: () => {}
+        template: '/templates/all-finance/all-finance-edit.html',
+        layout: '/templates/layout.html',
+        styles: ['/styles/all-finance/all-finance-edit.css'],
+        load: () => {
+          new AllFinanceEdit();
+        }
       },
     ];
 
     this.currentStyles = [];
-    this.currentScripts = [];
   }
 
+  //Роутинг по страницам
   async openRoute() {
-    const hashRoute = window.location.hash;
-    console.log("Текущий хеш:", hashRoute);
+    const hashRoute = window.location.hash.split('?')[0];
     const newRoute = this.routes.find(item => {
       return item.route === hashRoute;
     });
@@ -150,7 +166,8 @@ export class Router {
       return;
     }
 
-    this.removeCurrentResources();
+    //Удаление текущих стилей страницы
+    this.removeCurrentStyles();
 
     //Отрисовка страниц с layout и без него
     if (newRoute.template) {
@@ -161,9 +178,13 @@ export class Router {
       }
       content.innerHTML = await fetch(newRoute.template).then(response => response.text());
 
+      //Активация пунктов меню
+      this.activateMenuItem(newRoute);
       //Подгружаем имя и баланс
       this.showBalance().then();
       this.showUserName().then();
+      //Выход из системы
+      this.logout();
     }
 
     //Подключение стилей
@@ -171,13 +192,12 @@ export class Router {
       this.linkStyles(newRoute.styles);
     }
 
-    //Подключение скриптов
-    if (newRoute.scripts) {
-      this.linkScripts(newRoute.scripts);
-    }
-
     //Отображение заголовка страницы
-    document.getElementById('titlePage').innerText = newRoute.title;
+    const titleElement = document.getElementById('titlePage');
+    if (titleElement) {
+      titleElement.innerText = newRoute.title;
+    }
+    //Выполнение функции загрузки функционала страницы
     if (typeof newRoute.load === 'function') {
       newRoute.load();
     }
@@ -190,6 +210,25 @@ export class Router {
     if (userInfo && this.userNameElement.length > 0) {
       this.userNameElement.forEach(el => el.innerText = userInfo.userName + " " + userInfo.userLastName);
     }
+  }
+
+  //Выход из системы
+  logout() {
+    const logoutElement = document.querySelectorAll(".person-out");
+    const logoutLink = document.querySelectorAll(".logout");
+
+    const toggleModalElement = () => {
+      logoutLink.forEach(el => {
+        el.classList.toggle("logout-open");
+      });
+    }
+
+    logoutElement.forEach(el => {
+      el.addEventListener("click", (e) => {
+        e.stopPropagation();
+        toggleModalElement();
+      });
+    });
   }
 
   //Отображение баланса
@@ -207,9 +246,30 @@ export class Router {
     }
   }
 
+  //Активация пунктов меню
+  activateMenuItem(route) {
+    const details = document.querySelectorAll("details");
+    //Массив с роутами для категорий
+    const openDetailsRoutes = ['#/revenues', '#/expenses'];
+
+    document.querySelectorAll('.layout .link-sidebar').forEach(item => {
+      let href = item.getAttribute('href');
+
+      if ((route.route.includes(href) && href !== '#/login' && href !== '#/signup')) {
+        item.classList.add('active-link');
+
+        if (openDetailsRoutes.includes(href)) {
+          details.forEach(details => details.setAttribute('open', 'open'));
+        }
+      } else {
+        item.classList.remove('active-link');
+      }
+    });
+  }
+
   //Подключение стилей
   linkStyles(styles) {
-    const headElement = document.getElementsByTagName('head')[0];
+    const headElement = document.querySelector('head');
     styles.forEach(stylePath => {
       const link = document.createElement('link');
       link.rel = 'stylesheet';
@@ -219,27 +279,11 @@ export class Router {
     });
   }
 
-  //Подключение скриптов
-  linkScripts(scripts) {
-    const bodyElement = document.getElementsByTagName('body')[0];
-    scripts.forEach(scriptPath => {
-      const script = document.createElement('script');
-      script.src = scriptPath;
-      bodyElement.appendChild(script);
-      this.currentScripts.push(script);
-    });
-  }
-
-  //Удаление стилей и скриптов
-  removeCurrentResources() {
+  //Удаление стилей
+  removeCurrentStyles() {
     this.currentStyles.forEach(styleElement => {
       styleElement.remove();
     });
     this.currentStyles = [];
-
-    this.currentScripts.forEach(scriptElement => {
-      scriptElement.remove();
-    });
-    this.currentScripts = [];
   }
 }
